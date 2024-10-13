@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Pagamento</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card-container">
+            <div class="front">
+                <div class="image">
+                    <img src="./image/chip.png" alt="">
+                    <img src="./image/visa.png" alt="">
+                </div>
+                <div class="card-number-box">################</div>
+                <div class="flexbox">
+                    <div class="box">
+                        <span>card holder</span>
+                        <div class="card-holder-name">full name</div>
+                    </div>
+                    <div class="box">
+                        <span>expires</span>
+                        <div class="expiration">
+                            <span class="exp-month">mm</span>
+                            <span class="exp-year">yy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="back">
+                <div class="stripe"></div>
+                <div class="box">
+                    <span>cvv</span>
+                    <div class="cvv-box"></div>
+                    <img src="./image/visa.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <form id="addCardForm">
+            <div class="inputBox">
+                <span>card number</span>
+                <input type="text" maxlength="16" class="card-number-input" required>
+            </div>
+            <div class="inputBox">
+                <span>card holder</span>
+                <input type="text" class="card-holder-input" required>
+            </div>
+            <div class="flexbox">
+                <div class="inputBox">
+                    <span>expiration mm</span>
+                    <input type="number" class="month-input" id="expirationMonth" maxlength="2" required>
+                </div>
+                <div class="inputBox">
+                    <span>expiration yy</span>
+                    <input type="number" class="year-input" id="expirationYear" maxlength="4" required>
+                </div>
+                <div class="inputBox">
+                    <span>cvv</span>
+                    <input type="text" maxlength="4" class="cvv-input" required>
+                </div>
+            </div>
+            <input type="submit" value="submit" class="submit-btn">
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Numero do Cartão</th>
+                    <th>Nome do Titular</th>
+                    <th>Mês</th>
+                    <th>Ano</th>
+                    <th>CVV</th>
+                </tr>
+            </thead>
+            <tbody id="card-list">
+                <!-- Linhas dinâmicas de cartões -->
+                 
+            </tbody>
+        </table>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
