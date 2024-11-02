@@ -23,17 +23,16 @@ connection.connect((error) => {
     console.error("Erro ao conectar:", error.stack);
     return;
   }
-  console.log("Conectado");
+  console.log("Conectado ao banco de dados");
 
-  //CREATE
-  // Inserir o usuário
+  // CREATE - Inserir cartão
   app.post("/cards", (req, res) => {
-    const cardData = req.body; // Obter os dados do cartão do corpo da requisição
-    const query = "INSERT INTO numberCard SET ?"; // Verifique se a tabela é 'numberCard'
+    const cardData = req.body;
+    const query = "INSERT INTO numberCard SET ?";
 
-    // Usar cardData em vez de numberCard
-    connection.query(query, cardData, (error, results, fields) => {
+    connection.query(query, cardData, (error, results) => {
       if (error) {
+        console.error("Erro ao inserir o cartão:", error.message);
         return res.status(500).json({ error: "Erro ao inserir o cartão" });
       }
       res.status(201).json({
@@ -43,26 +42,50 @@ connection.connect((error) => {
     });
   });
 
-  //READ
-  // Função consulta
+  // READ - Consultar todos os cartões
   app.get("/cards", (req, res) => {
-    const query = "SELECT * FROM numberCard"; // CONSULTA
+    const query = "SELECT * FROM numberCard";
     connection.query(query, (error, results) => {
       if (error) {
+        console.error("Erro ao consultar cartões:", error.message);
         return res.status(500).json({ error: "Erro ao consultar cartões!" });
       }
       res.status(200).json(results);
     });
   });
 
-  //Atualizar (Update)
-  app.put("/cards/:cardNumber", (req, res) => {
-    const cardNumber = req.params.cardNumber;
-    const newCardData = req.body;
-    const query = "UPDATE numberCard SET ? WHERE cardNumber = ?";
-    connection.query(query, [newCardData, cardNumber], (error, results) => {
+  // READ - Consultar cartão por ID
+  app.get("/cards/:id", (req, res) => {
+    const cardId = req.params.id;
+    console.log(`Buscando cartão com ID: ${cardId}`);
+    const query = "SELECT * FROM numberCard WHERE idNumber = ?";
+    connection.query(query, [cardId], (error, results) => {
       if (error) {
-        return res.status(500).json({ error: "Erro a atualizar o cartão" });
+        console.error("Erro ao buscar o cartão:", error.message);
+        return res.status(500).json({ error: "Erro ao buscar o cartão" });
+      }
+      if (results.length === 0) {
+        console.log("Cartão não encontrado");
+        return res.status(404).json({ error: "Cartão não encontrado" });
+      }
+      console.log("Cartão encontrado:", results[0]);
+      res.status(200).json(results[0]);
+    });
+  });
+
+  // UPDATE - Atualizar cartão
+  app.put("/cards/:id", (req, res) => {
+    const cardId = req.params.id;
+    const newCardData = req.body;
+    const query = "UPDATE numberCard SET ? WHERE idNumber = ?";
+
+    connection.query(query, [newCardData, cardId], (error, results) => {
+      if (error) {
+        console.error("Erro ao atualizar o cartão:", error.message);
+        return res.status(500).json({ error: "Erro ao atualizar o cartão", details: error.message });
+      }
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Cartão não encontrado" });
       }
       res.status(200).json({
         message: "Cartão atualizado com sucesso",
@@ -71,19 +94,26 @@ connection.connect((error) => {
     });
   });
 
-  //DELETE
-  app.delete("/cards/:cardNumber", (req, res) => {
-    const cardNumber = req.params.cardNumber;
-    const query = "DELETE FROM numberCard WHERE cardNumber = ?";
-    connection.query(query, [cardNumber], (error, results) => {
+  // DELETE - Deletar cartão
+  app.delete("/cards/:id", (req, res) => {
+    const cardId = req.params.id;
+    console.log(`Tentando deletar cartão com ID: ${cardId}`);
+    const query = "DELETE FROM numberCard WHERE idNumber = ?";
+    connection.query(query, [cardId], (error, results) => {
       if (error) {
+        console.error("Erro ao deletar o cartão:", error.message);
         return res.status(500).json({ error: 'Erro ao deletar o cartão' });
       }
+      if (results.affectedRows === 0) {
+        console.log("Cartão não encontrado");
+        return res.status(404).json({ error: 'Cartão não encontrado' });
+      }
+      console.log("Cartão deletado com sucesso");
       res.status(200).json({ message: 'Cartão deletado com sucesso', affectedRows: results.affectedRows });
     });
   });
 
-  //Iniciar o servidor
+  // Iniciar o servidor
   app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
   });
