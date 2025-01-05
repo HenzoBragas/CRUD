@@ -13,8 +13,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "admin",
-  database: "card",
-  port: 3306,
+  database: "card"
 });
 
 // Conectar ao banco de dados
