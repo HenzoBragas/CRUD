@@ -6,6 +6,8 @@ const yearInput = document.querySelector('.year-input');
 const cvvInput = document.querySelector('.cvv-input');
 const form = document.getElementById('addCardForm');
 const cardList = document.getElementById('card-list');
+const apiUrl =  "https://crud-ohzo.onrender.com";
+
 let editingCardId = null;
 
 // Função para verificar se todos os campos estão preenchidos
@@ -47,7 +49,7 @@ cvvInput.addEventListener('input', () => {
 
 // Função para carregar cartões
 function loadCards() {
-    fetch('http://localhost:3000/cards')
+    fetch(`${apiUrl}/cards`)
         .then(response => response.json())
         .then(cards => {
             cardList.innerHTML = '';
@@ -72,7 +74,7 @@ function loadCards() {
 
 // Função para editar cartão
 function editCard(id) {
-    fetch(`http://localhost:3000/cards/${id}`)
+    fetch(`${apiUrl}/cards/${id}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao buscar o cartão');
@@ -102,7 +104,7 @@ function editCard(id) {
 
 // Função para deletar cartão
 function deleteCard(id) {
-    fetch(`http://localhost:3000/cards/${id}`, {
+    fetch(`${apiUrl}/cards/${id}`, {
         method: 'DELETE'
     })
     .then(response => response.json())
@@ -132,11 +134,11 @@ form.addEventListener('submit', (e) => {
     };
 
     const method = editingCardId ? 'PUT' : 'POST';
-    const url = editingCardId ? `http://localhost:3000/cards/${editingCardId}` : 'http://localhost:3000/cards';
+    const url = editingCardId ? `${apiUrl}/cards/${editingCardId}` : `${apiUrl}/cards`;
 
     // Verificação de duplicados antes de inserir um novo cartão
     if (!editingCardId) {
-        fetch('http://localhost:3000/cards') // Verifica todos os cartões existentes
+        fetch(`${apiUrl}/cards`) // Verifica todos os cartões existentes
             .then(response => response.json())
             .then(cards => {
                 const isDuplicate = cards.some(card => card.cardNumber === cardData.cardNumber && card.cardHolder === cardData.cardHolder);
