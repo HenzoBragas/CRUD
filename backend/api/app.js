@@ -23,8 +23,6 @@ connection.connect((error) => {
     console.error("Erro ao conectar:", error.stack);
     return;
   }
-  console.log("Conectado ao banco de dados");
-
   // CREATE - Inserir cartão
   app.post("/cards", (req, res) => {
     const cardData = req.body;
