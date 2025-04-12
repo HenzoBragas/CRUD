@@ -3,17 +3,18 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const port = 3000; // Porta do servidor
+const port = 3000; 
 
 app.use(express.json());
 app.use(cors());
 
 // Configuração da conexão banco de dados
 const connection = mysql.createConnection({
-  host: "localhost",
+  host: "caboose.proxy.rlwy.net",
   user: "root",
   password: "admin",
-  database: "card"
+  database: "card",
+  port: 31135
 });
 
 // Conectar ao banco de dados

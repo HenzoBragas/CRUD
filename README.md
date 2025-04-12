@@ -13,4 +13,9 @@
 #### The frontend design was inspired by a video from the YouTube channel Mr. Web Designer. I made some modifications, such as changing the colors, widths, and heights, and added a dynamic table at the bottom of the page.
 #### The key feature of the frontend is its function for communicating with the backend, handling HTTP requests. These requests are made through the  `LoadCards()`  function.
 ### Backend  
-#### For the backend, I am using Node.js libraries like Express, MySQL, and Cors to manage operations and database communication.
+#### For the backend, I am using Node.js libraries like Express, MySQL, and Cors to manage operations and database communication. Application endpoints are created through object methods such as `app.get()`.
+### Endpoints CRUD
+- ### Create - Insert card
+- ### Read - Check card
+- ### Update - Update  Card
+- ### Delete - Delete card
