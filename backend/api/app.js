@@ -26,7 +26,7 @@ connection.connect((error) => {
   // CREATE - Inserir cartão
   app.post("/cards", (req, res) => {
     const cardData = req.body;
-    const query = "INSERT INTO numberCard SET ?";
+    const query = "INSERT INTO numbercard SET ?";
 
     connection.query(query, cardData, (error, results) => {
       if (error) {
@@ -42,7 +42,7 @@ connection.connect((error) => {
 
   // READ - Consultar todos os cartões
   app.get("/cards", (req, res) => {
-    const query = "SELECT * FROM numberCard";
+    const query = "SELECT * FROM numbercard";
     connection.query(query, (error, results) => {
       if (error) {
         console.error("Erro ao consultar cartões:", error.message);
@@ -56,7 +56,7 @@ connection.connect((error) => {
   app.get("/cards/:id", (req, res) => {
     const cardId = req.params.id;
     console.log(`Buscando cartão com ID: ${cardId}`);
-    const query = "SELECT * FROM numberCard WHERE idNumber = ?";
+    const query = "SELECT * FROM numbercard WHERE idNumber = ?";
     connection.query(query, [cardId], (error, results) => {
       if (error) {
         console.error("Erro ao buscar o cartão:", error.message);
@@ -75,7 +75,7 @@ connection.connect((error) => {
   app.put("/cards/:id", (req, res) => {
     const cardId = req.params.id;
     const newCardData = req.body;
-    const query = "UPDATE numberCard SET ? WHERE idNumber = ?";
+    const query = "UPDATE numbercard SET ? WHERE idNumber = ?";
 
     connection.query(query, [newCardData, cardId], (error, results) => {
       if (error) {
@@ -96,7 +96,7 @@ connection.connect((error) => {
   app.delete("/cards/:id", (req, res) => {
     const cardId = req.params.id;
     console.log(`Tentando deletar cartão com ID: ${cardId}`);
-    const query = "DELETE FROM numberCard WHERE idNumber = ?";
+    const query = "DELETE FROM numbercard WHERE idNumber = ?";
     connection.query(query, [cardId], (error, results) => {
       if (error) {
         console.error("Erro ao deletar o cartão:", error.message);
