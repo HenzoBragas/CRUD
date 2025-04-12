@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const express = require('express');
 const cors = require('cors');
 
@@ -10,11 +10,11 @@ app.use(cors());
 
 // Configuração da conexão banco de dados
 const connection = mysql.createConnection({
-  host: "caboose.proxy.rlwy.net",
+  host: "tramway.proxy.rlwy.net",
   user: "root",
-  password: "admin",
+  password: "eqTjlqifWCsVEarOiRfpLAziWMFrRKHv",
   database: "card",
-  port: 31135
+  port: 15645
 });
 
 // Conectar ao banco de dados
