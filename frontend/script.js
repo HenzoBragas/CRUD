@@ -6,7 +6,6 @@ const yearInput = document.querySelector('.year-input');
 const cvvInput = document.querySelector('.cvv-input');
 const form = document.getElementById('addCardForm');
 const cardList = document.getElementById('card-list');
-
 let editingCardId = null;
 
 // Função para verificar se todos os campos estão preenchidos
@@ -48,7 +47,7 @@ cvvInput.addEventListener('input', () => {
 
 // Função para carregar cartões
 function loadCards() {
-    fetch(`https://crud-ohzo.onrender.com/cards`)
+    fetch('https://crud-ohzo.onrender.com/card')
         .then(response => response.json())
         .then(cards => {
             cardList.innerHTML = '';
@@ -73,7 +72,7 @@ function loadCards() {
 
 // Função para editar cartão
 function editCard(id) {
-    fetch(`https://crud-ohzo.onrender.com/cards/${id}`)
+    fetch(`https://crud-ohzo.onrender.com/card/${id}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao buscar o cartão');
@@ -103,7 +102,7 @@ function editCard(id) {
 
 // Função para deletar cartão
 function deleteCard(id) {
-    fetch(`https://crud-ohzo.onrender.com/cards${id}`, {
+    fetch(`https://crud-ohzo.onrender.com/card/${id}`, {
         method: 'DELETE'
     })
     .then(response => response.json())
@@ -133,11 +132,11 @@ form.addEventListener('submit', (e) => {
     };
 
     const method = editingCardId ? 'PUT' : 'POST';
-    const url = editingCardId ? `$https://crud-ohzo.onrender.com/cards/${editingCardId}` : `https://crud-ohzo.onrender.com/cards`;
+    const url = editingCardId ? `https://crud-ohzo.onrender.com/card/${editingCardId}` : 'https://crud-ohzo.onrender.com/card';
 
     // Verificação de duplicados antes de inserir um novo cartão
     if (!editingCardId) {
-        fetch('https://crud-ohzo.onrender.com/cards') // Verifica todos os cartões existentes
+        fetch('https://crud-ohzo.onrender.com/card') // Verifica todos os cartões existentes
             .then(response => response.json())
             .then(cards => {
                 const isDuplicate = cards.some(card => card.cardNumber === cardData.cardNumber && card.cardHolder === cardData.cardHolder);

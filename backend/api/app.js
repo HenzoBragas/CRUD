@@ -53,7 +53,7 @@ connection.connect((error) => {
   });
 
   // READ - Consultar cartão por ID
-  app.get("/cards/:id", (req, res) => {
+  app.get("/card/:id", (req, res) => {
     const cardId = req.params.id;
     console.log(`Buscando cartão com ID: ${cardId}`);
     const query = "SELECT * FROM numbercard WHERE idNumber = ?";
