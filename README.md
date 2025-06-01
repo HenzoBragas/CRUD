@@ -1,21 +1,66 @@
-# Card Registration with CRUD 🚀🚀
+# 📦 Crud com Cadastro de Cartão 
 ![pageofsite](./Print.png)
 
-## Summary 
-#### This website was developed using HTML5, CSS, and JavaScript. The project aims to allow users to register bank cards and view the inserted data, with functionalities to remove or edit the registered card information.
+## 💻 Aplicação CRUD 
+Aplicação full-stack simples para demonstrar os conceitos básicos de CRUD (Create, Read, Update, Delete) de forma visual e didática. Utiliza banco de dados relacional para armazenar os dados dos cartões cadastrados.
 
-## Why develop this Project ? 
-#### This project was proposed by my Computer Science professor to put into practice concepts learned in class, such as HTTP requests, frontend-backend communication, and CRUD operations.
+## 🎯 Objetivo do Projeto
+Este projeto foi uma proposta da disciplina Desenvolvimento Web, do curso de Ciência da Computação, com o objetivo de aplicar na prática os seguintes conceitos:
+
+- 🔁 Requisições HTTP (GET, POST, PUT, DELETE)
+
+- 🔗 Comunicação entre front-end e back-end
+
+- 🗃️ Integração com banco de dados relacional
+
+Com esta aplicação, é possível:
+
+- 📋 Listar todos cartões
+
+- 📌 Cadastrar um novo cartão
+
+- 📝 Atualizar os dados de um cartão
+
+- 🗑️  Deletar um cartão específico
 
 
-## How was this website developed ?
-### FrontEnd 
-#### The frontend design was inspired by a video from the YouTube channel Mr. Web Designer. I made some modifications, such as changing the colors, widths, and heights, and added a dynamic table at the bottom of the page.
-#### The key feature of the frontend is its function for communicating with the backend, handling HTTP requests. These requests are made through the  `LoadCards()`  function.
-### Backend  
-#### For the backend, I am using Node.js libraries like Express, MySQL, and Cors to manage operations and database communication. Application endpoints are created through object methods such as `app.get()`.
-### Endpoints CRUD
-- ### Create - Insert card
-- ### Read - Check card
-- ### Update - Update  Card
-- ### Delete - Delete card
+## 🧠 Sobre a Modelagem
+![modelagem](./images/modelagem.png)
+
+A modelagem foi pensada para facilitar a compreensão do funcionamento básico de um CRUD. Ela permite a inserção simples de dados, **sem foco em validações ou restrições complexas**.
+
+## 📂 Estrutura do Projeto
+Projeto desenvolvido com foco no aprendizado e aplicação de conceitos full-stack:
+```
+├── backend
+│    ├── app.js                 # Arquivo principal do backend
+│    ├── node_modules           # Diretório das dependências instaladas 
+│    ├── package.json           # Configuração de dependências e scripts do projeto
+│    ├── package-lock.json      # Controle de versões exatas das dependências
+│ 
+├── frontend 
+│   ├── image                   # Imagens utilizadas na aplicação
+│   ├── index.html              # Estrutura principal da página
+│   ├── style.css               # Estilização da interface
+│   ├── script.js               # Lógica da aplicação
+│ 
+├── image                       # imagem da documentação
+├── mysql.sql                   # Script de modelagem do banco de dados MySQL
+├── README.md                   # Documentação do projeto
+```
+ 
+#### ⚠️ Atualmente, a execução local do projeto não está disponível.
+
+### 🛠  Tecnologias Utilizadas
+### 💻 Backend
+
+- **Node.js**
+
+- **Express.js**
+
+- **MYSQL**
+
+### 🌍 Deploy e Hospedagem
+
+- **Render**
+- **Railway**
